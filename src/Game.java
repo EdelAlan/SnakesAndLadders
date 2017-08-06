@@ -5,7 +5,6 @@ public class Game {
     private Player player2;
     private int p1roll;
     private int p2roll;
-    private final int BOARD = 100;
     private int dice;
 
     public Game (Player player1, Player player2) {
@@ -50,7 +49,8 @@ public class Game {
 
     private int throwDice() {
         Random random = new Random();
-        dice = random.nextInt(6) + 1;
-        return dice;
+        int dice1 = random.nextInt(6) + 1;
+        int dice2 = random.nextInt(6) + 1;
+        return dice1 + dice2;
     }
 }
