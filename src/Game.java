@@ -4,8 +4,6 @@ import java.util.Random;
 public class Game {
     private Player player1;
     private Player player2;
-    private int p1roll;
-    private int p2roll;
     private HashMap<Integer, Integer> sal = new HashMap<>();
 
     public Game (Player player1, Player player2) {
@@ -13,10 +11,7 @@ public class Game {
         this.player2 = player2;
     }
 
-
-
     public void startGame() throws InterruptedException {
-        System.out.println();
 
         sal.put(25, 35);
         sal.put(50, 60);
@@ -28,23 +23,17 @@ public class Game {
         while (true) {
 
         //–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––– Player 1
-            makeMove(player1);
-            if (player1.getPosition() >= 100 ) {
-                System.out.println(player1.getName() + " is winner!");
-                break;
-            }
+            int p1 = makeMove(player1);
+            if (p1 == 1) break;
 
-        //–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––– Player 2
-            makeMove(player2);
-            if (player2.getPosition() >= 100 ) {
-                System.out.println(player2.getName() + " is winner!");
-                break;
-            }
+            //–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––– Player 2
+            int p2 = makeMove(player2);
+            if (p2 == 1) break;
 
         }
     }
 
-    private void makeMove(Player player) throws InterruptedException {
+    private int makeMove(Player player) throws InterruptedException {
         int diceRoll = throwDice();
         int currentPos = player.getPosition();
 
@@ -58,7 +47,13 @@ public class Game {
             player.setPosition(p);
             System.out.println(player.getName() + " rolled " + diceRoll + ", position from " +currentPos + " to " + player.getPosition());
         }
+
+        if (player.getPosition() >= 100) {
+            System.out.println(player.getName() + " is winner!");
+            return 1;
+        }
         Thread.sleep(250);
+        return 0;
     }
 
     private int throwDice() {
