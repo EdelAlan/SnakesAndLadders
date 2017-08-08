@@ -42,7 +42,11 @@ public class Game {
 
         if (value != null) {
             player.setPosition(value);
-            System.out.println(player.getName() + " rolled " + diceRoll + ", and found something, position from " + p + " to " + player.getPosition());
+            if (p > value) {
+                System.out.println(player.getName() + " rolled " + diceRoll + ", and found a snake, position from " + p + " to " + player.getPosition());
+            } else if (p < value) {
+                System.out.println(player.getName() + " rolled " + diceRoll + ", and found a ladder, position from " + p + " to " + player.getPosition());
+            }
         } else {
             player.setPosition(p);
             System.out.println(player.getName() + " rolled " + diceRoll + ", position from " +currentPos + " to " + player.getPosition());
